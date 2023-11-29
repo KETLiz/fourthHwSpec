@@ -17,19 +17,28 @@ public class Transaction {
     public int debitTransaction() {
         return debit.addAccountBalance();
     }
+
+    /**
+     * Метод перевода денежных средств с дебетового счёта на кредитный
+     * @throws InsufficientFundsException недостаточно средств на балансе
+     */
     public void moneyTransaction() throws InsufficientFundsException {
         System.out.print("Введите сумму транзакции с дебетового счёта" +
                 " на кредитный ");
         int payment = sc.nextInt();
+        if(payment < 0) {
+            throw new IllegalArgumentException("Что ты делаешь? Мне " +
+                    "не нужны отрицательные платежи!");
+        }
         if(payment > debit.getBalance()) {
             throw new InsufficientFundsException("Недостаточно средств");
         }
         if(payment > credit.getBalance()*(-1)) {
             int delta = credit.balance + payment; // переплата по кредиту
-            credit.balance = 0;
-            debit.balance = debit.balance - payment + delta;
+            credit.balance = 0; // кредит погашен
+            debit.balance = debit.balance - payment + delta; // возврат остатка суммы платежа на дебетовый счёт
             System.out.printf("Баланс по кредиту равен %d\n" +
-                    "Сумма переплаты %d возвращена на дебетовый счёт\n" +
+                    "Сумма переплаты %d рублей возвращена на дебетовый счёт\n" +
                     "Баланс дебетового счёта равен %d", credit.getBalance(), delta, debit.getBalance());
         } else {
             credit.balance += payment;

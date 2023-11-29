@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Account {
+public abstract class Account {
     protected int balance;
     Scanner sc = new Scanner(System.in);
 

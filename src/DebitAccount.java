@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class DebitAccount extends Account {
     /**
-     * Функция внесения наличных денег на счёт
+     * Метод внесения наличных денег на счёт
      * @return итоговую сумму на счёте
      */
     public int addAccountBalance() {
@@ -33,7 +33,7 @@ public class DebitAccount extends Account {
     }
 
     /**
-     * Функция снятия наличных со счёта
+     * Метод снятия наличных со счёта
      * @return остаток на счёте после снятия наличных
      * @throws InsufficientFundsException недостаточно денег на счёте
      */
